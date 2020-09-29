@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{%block content%}
+ <div class="row">
+    <div id="col-sm">
+        <h2 style="    text-align: center;" >all blog</h2 >
+        {%if blogs%}
+        {%for blog in blogs%}
+        <div class="col-sm blog" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+            <h3>{{blog.user.name}}</h3>
+            <a href="{%url 'blog' blog.id%}"><h2>{{blog.Title}}</h2>
+                <div class="blog-text">{{blog.blog}}</div></a>
+            <br>
+            <a href="#">{{blog.comment_set.count}}</a>
+            <a href="{%url 'comment' blog.id%}">коммент</a>
+        </div>
+        {%endfor%}
+        {%endif%}
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+
+$.each($('.blog-text'),function(e,t){
+var shortText = jQuery.trim($(this).text()).substring(0, 500)
+    .split(" ").slice(0, -1).join(" ") + "...";
+$(this).text(shortText)
+})
+
+})
+
+</script>
+{%endblock%}

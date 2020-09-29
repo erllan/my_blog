@@ -1,0 +1,27 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+#head{
+    background-color: #FF0000;
+    padding: 12px;
+}
+#test{
+    padding-right: 100px;
+}
+
+.col-sm.blog a{
+   text-decoration: none;
+}
+
+.col-sm.blog{
+margin-bottom: 15px
+}
+
+.col-sm.blog:hover{
+ box-shadow: 0 0 10px rgba(0,0,0,1);
+}
+
+.login-form input{
+    margin-bottom: 15px
+}
