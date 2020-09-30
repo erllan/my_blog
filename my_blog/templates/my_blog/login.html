@@ -3,7 +3,7 @@
 <h2 style="text-align: center">Log-in</h2>
 <form method="post" action="{% url 'login' %}" class="login-form">
     {% csrf_token %}
-    <input class="form-control" type="text" name="mail" placeholder="Введите email" required>
+    <input class="form-control" type="text" name="email" placeholder="Введите email" required>
     <input class="form-control" type="password" name="password" placeholder="Введите пароль" required>
     <button class="btn btn-primary" type="submit" value="войти">Войти</button>
 

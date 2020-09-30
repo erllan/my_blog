@@ -6,7 +6,7 @@ def login(request):
     error = ''
     if request.method == 'POST':
         try:
-            login = request.POST['mail']
+            login = request.POST['email']
             password = request.POST['password']
         except:
             login = None
@@ -35,7 +35,7 @@ def logout(request):
 def register(request):
     if request.method == 'POST':
         createUser = User(name=request.POST['name'],
-                          mail=request.POST['mail'],
+                          mail=request.POST['email'],
                           password=request.POST['password'])
         createUser.save()
         if createUser:

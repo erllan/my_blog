@@ -4,7 +4,7 @@ from datetime import datetime
 
 class User(models.Model):
     name = models.CharField(max_length=100)
-    mail = models.CharField(max_length=100, unique=True)
+    email = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=200)
 
     def __str__(self):
