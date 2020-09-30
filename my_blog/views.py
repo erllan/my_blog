@@ -14,11 +14,11 @@ def login(request):
             pass
         if login and password and login != '' and password != '':
             try:
-                user = User.objects.get(mail=login)
+                user = User.objects.get(email=login)
             except:
                 user = None
             if user and user.password == password:
-                userData = {'mail': user.mail, 'id': user.id, 'name': user.name}
+                userData = {'email': user.email, 'id': user.id, 'name': user.name}
                 request.session['User'] = userData
                 return redirect('index')
             error = 'неверный логин или пароль'
@@ -35,9 +35,11 @@ def logout(request):
 def register(request):
     if request.method == 'POST':
         createUser = User(name=request.POST['name'],
-                          mail=request.POST['email'],
+                          email=request.POST['email'],
                           password=request.POST['password'])
         createUser.save()
+        userData = {'email': createUser.email, 'id': createUser.id, 'name': createUser.name}
+        request.session['User'] = userData
         if createUser:
             return redirect('index')
     return render(request, 'my_blog/register.html')
@@ -59,21 +61,21 @@ def addBlog(request):
     return render(request, 'my_blog/addblog.html')
 
 
-def blog(request, id):
-    blog = Blog.objects.get(id=id)
-    return render(request, 'my_blog/blog.html', {'blog': blog})
-
 
 def like():
     pass
 
 
-def comment(request, id_blog):
+def blog(request, id_blog):
     blog = Blog.objects.get(id=id_blog)
-    user = User.objects.get(id=request.session['User']['id'])
-    if request.method == 'POST':
-        comment = Comment(comment=request.POST['comment'],
-                          user=user,
-                          toBlog=blog)
-        comment.save()
-    return render(request, 'my_blog/comment.html', {'blog': blog})
+    try:
+        user = User.objects.get(id=request.session['User']['id'])
+    except:
+        user = False
+    if user:
+        if request.method == 'POST':
+            comment = Comment(comment=request.POST['comment'],
+                              user=user,
+                              toBlog=blog)
+            comment.save()
+    return render(request, 'my_blog/blog.html', {'blog': blog})

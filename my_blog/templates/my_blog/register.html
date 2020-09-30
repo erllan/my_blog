@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%extends 'base.html'%}
+{%block content%}
 <form method="post" action="{% url 'register' %}">
     {% csrf_token %}
-    <ul>
-    name<li><input type="text" name="name"></li>
-    mile<li><input type="text" name="email"></li>
-    password<li><input type="password" name="password"></li>
-    <li><input type="submit" value="регистрация"></li>
-    </ul>
+    <br>
+    <input class="form-control" type="text" name="name" placeholder="email" required><br>
+    <input class="form-control" type="text" name="email" placeholder="name" required><br>
+    <input class="form-control" type="password" name="password" placeholder="password" required><br>
+    <button class="btn btn-primary" type="submit" value="регистрация">регистрация</button>
+
 </form>
-</body>
-</html>
+
+{%endblock%}

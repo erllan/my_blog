@@ -1,8 +1,20 @@
-{% extends 'base.html'%}
+{%extends 'base.html'%}
 {%block content%}
+<hr>
+<h2>Написал блог {{blog.user.name}}</h2>
+<hr>
+<h3>{{blog.Title}}</h3>
+<p>{{blog.blog}}</p>
+<hr>
+<h3>Коментарии</h3>
+<form action="{%url 'blog' blog.id %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="comment">
+    <input type="submit" value="отправить">
+</form>
+    {%for comment in blog.comment_set.all%}
+        <div>{{comment.user.name}}<br>
+            {{comment.comment}}</div>
 
-<h2>{{blog.user.name}}</h2>
-<h2>{{blog.Title}}</h2>
-{{blog.blog}}
-
+    {%endfor%}
 {%endblock%}
